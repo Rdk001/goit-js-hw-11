@@ -5,21 +5,31 @@
 }
 body {
   background-color: #f1f1f1;
+  overflow-x: hidden;
 }
 .container {
-  width: 1500px;
+  width: 1490px;
   padding-left: 15px;
   padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .search-form {
+  width: 1460px;
   height: 50px;
   background-color: rgb(13, 102, 211);
 
   border-radius: 4px;
+
+  position: fixed;
+  top: 0;
+  z-index: 10;
 }
+
 .submit-btn {
   border-radius: 4px;
   border: none;
+  cursor: pointer;
 }
 
 input {
@@ -32,10 +42,11 @@ input {
   border: none;
 }
 .gallery {
-  margin-top: 30px;
+  margin-top: 70px;
   max-width: 1600px;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 20px;
 }
 .info {
@@ -68,10 +79,10 @@ input {
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
-
   color: #f1f1f1;
   padding: 8px 12px;
   background-color: rgb(13, 102, 211);
   border-radius: 4px;
   border: none;
+  cursor: pointer;
 }
