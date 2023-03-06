@@ -1,9 +1,11 @@
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-const axios = require('axios/dist/browser/axios.cjs');
+import axios from 'axios';
 
 import ApiService from './js/news-servise';
+
+const lightbox = new SimpleLightbox('.gallery__item', { captionDelay: 250 });
 
 const refs = {
   form: document.querySelector('.search-form'),
@@ -29,9 +31,10 @@ async function onSearchQuery(e) {
     );
     return;
   }
+
   apiService.resetPage();
   try {
-    const data = await apiService.featchCard();
+    const data = await apiService.fetchData();
     if (data.data.hits.length === 0) {
       refs.loadMoreBtn.style.display = 'none';
       Notiflix.Notify.failure(
@@ -39,7 +42,7 @@ async function onSearchQuery(e) {
       );
       return;
     }
-    renderingsCards(data.data.hits);
+    renderCards(data.data.hits);
     if (data.data.hits.length !== 0) {
       Notiflix.Notify.success(
         `Hooray! We found ${data.data.totalHits} images.`
@@ -52,8 +55,8 @@ async function onSearchQuery(e) {
 }
 async function onLoadMore() {
   try {
-    const data = await apiService.featchCard();
-    renderingsCards(data.data.hits);
+    const data = await apiService.fetchData();
+    renderCards(data.data.hits);
     if (refs.gallery.children.length === data.data.totalHits) {
       refs.loadMoreBtn.style.display = 'none';
       Notiflix.Notify.info(
@@ -65,7 +68,7 @@ async function onLoadMore() {
   }
 }
 
-function renderingsCards(data) {
+function renderCards(data) {
   let card = data
     .map(
       item =>
@@ -95,8 +98,6 @@ function renderingsCards(data) {
     )
     .join('');
   refs.gallery.insertAdjacentHTML('beforeend', card);
-
-  const lightbox = new SimpleLightbox('.gallery__item', { captionDelay: 250 });
 }
 function clearGallery() {
   refs.gallery.innerHTML = '';

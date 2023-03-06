@@ -1,13 +1,12 @@
 import axios from 'axios';
 
 export default class ApiService {
-  query;
   constructor() {
     this.query = '';
     this.page = 1;
   }
 
-  async featchCard() {
+  async fetchData() {
     const API_KEY = '34125445-1c9917b2e51e42d8e5ff23e92';
     const BASE_URL = 'https://pixabay.com/api/';
     try {
