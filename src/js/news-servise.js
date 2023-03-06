@@ -14,7 +14,7 @@ export default class ApiService {
         `${BASE_URL}?key=${API_KEY}&q=${this.query}&per_page=40&page=${this.page}&image_type=photo&orientation=horizontal&safesearch=true`
       );
       this.incrementPage();
-      return response;
+      return response.data;
     } catch (error) {
       console.log(error);
     }

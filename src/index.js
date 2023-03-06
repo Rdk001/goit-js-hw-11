@@ -4,9 +4,9 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import axios from 'axios';
 
 import ApiService from './js/news-servise';
-
 const apiService = new ApiService();
-const lightbox = new SimpleLightbox('.gallery__item', { captionDelay: 250 });
+
+let lightbox = null;
 
 const refs = {
   form: document.querySelector('.search-form'),
@@ -21,6 +21,7 @@ refs.loadMoreBtn.style.display = 'none';
 
 async function onSearchQuery(e) {
   e.preventDefault();
+
   clearGallery();
   apiService.query = e.currentTarget.elements.searchQuery.value;
   if (!apiService.query) {
@@ -33,31 +34,37 @@ async function onSearchQuery(e) {
   }
 
   apiService.resetPage();
+
   try {
     const data = await apiService.fetchData();
-    if (data.data.hits.length === 0) {
+
+    if (!data.hits.length) {
       refs.loadMoreBtn.style.display = 'none';
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
       return;
     }
-    renderCards(data.data.hits);
-    if (data.data.hits.length !== 0) {
-      Notiflix.Notify.success(
-        `Hooray! We found ${data.data.totalHits} images.`
-      );
+
+    renderCards(data.hits);
+    lightbox = new SimpleLightbox('.gallery__item', { captionDelay: 250 });
+    if (data.hits.length) {
+      Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
     }
   } catch (error) {
     console.log(error);
   }
+
   refs.loadMoreBtn.style.display = 'block';
 }
+
 async function onLoadMore() {
   try {
     const data = await apiService.fetchData();
-    renderCards(data.data.hits);
-    if (refs.gallery.children.length === data.data.totalHits) {
+
+    renderCards(data.hits);
+    lightbox.refresh();
+    if (refs.gallery.children.length === data.totalHits) {
       refs.loadMoreBtn.style.display = 'none';
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
