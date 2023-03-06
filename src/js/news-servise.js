@@ -26,12 +26,4 @@ export default class ApiService {
   resetPage() {
     this.page = 1;
   }
-
-  get query() {
-    return this.query;
-  }
-
-  set query(newQuery) {
-    this.query = newQuery;
-  }
 }

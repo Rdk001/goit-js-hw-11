@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import ApiService from './js/news-servise';
 
+const apiService = new ApiService();
 const lightbox = new SimpleLightbox('.gallery__item', { captionDelay: 250 });
 
 const refs = {
@@ -12,7 +13,6 @@ const refs = {
   gallery: document.querySelector('.gallery'),
   loadMoreBtn: document.querySelector('.load-more'),
 };
-const apiService = new ApiService();
 
 refs.form.addEventListener('submit', onSearchQuery);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
