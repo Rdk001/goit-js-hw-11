@@ -7,47 +7,61 @@ body {
   background-color: #f1f1f1;
   overflow-x: hidden;
 }
+
 .container {
-  width: 1490px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 1500px;
   padding-left: 15px;
   padding-right: 15px;
   margin-left: auto;
   margin-right: auto;
 }
 .search-form {
-  width: 1460px;
+  display: flex;
+  justify-content: center;
   height: 50px;
-  background-color: rgb(13, 102, 211);
-
+  background-color: rgb(0, 119, 255);
   border-radius: 4px;
-
-  position: fixed;
-  top: 0;
-  z-index: 10;
 }
 
 .submit-btn {
-  border-radius: 4px;
-  border: none;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  height: 25px;
+  padding: 4px 12px;
+  color: gray;
+  background-color: #fff;
+  border-radius: 20px;
+  /* border: 1px solid gray; */
   cursor: pointer;
 }
-
+.submit-btn:hover,
+.submit-btn:focus {
+  background-color: blue;
+  color: white;
+}
 input {
+  outline: none;
   padding-top: 15px;
   padding-bottom: 15px;
   height: 25px;
-  margin-left: 650px;
+
   margin-top: 10px;
   border-radius: 4px;
   border: none;
 }
 .gallery {
-  margin-top: 70px;
-  max-width: 1600px;
+  margin-top: 20px;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   gap: 20px;
+  padding: 0;
 }
 .info {
   display: flex;
@@ -76,13 +90,18 @@ input {
   color: black;
 }
 .load-more {
+  display: inline-block;
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
   color: #f1f1f1;
   padding: 8px 12px;
   background-color: rgb(13, 102, 211);
-  border-radius: 4px;
+  border-radius: 20px;
   border: none;
   cursor: pointer;
+}
+.load-more:hover,
+.load-more:focus {
+  background-color: blue;
 }

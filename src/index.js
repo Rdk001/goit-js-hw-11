@@ -1,7 +1,6 @@
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import axios from 'axios';
 
 import ApiService from './js/news-servise';
 const apiService = new ApiService();
@@ -21,9 +20,10 @@ refs.loadMoreBtn.style.display = 'none';
 
 async function onSearchQuery(e) {
   e.preventDefault();
-
   clearGallery();
+
   apiService.query = e.currentTarget.elements.searchQuery.value;
+
   if (!apiService.query) {
     refs.loadMoreBtn.style.display = 'none';
     refs.gallery.innerHTML = '';
@@ -47,7 +47,9 @@ async function onSearchQuery(e) {
     }
 
     renderCards(data.hits);
+
     lightbox = new SimpleLightbox('.gallery__item', { captionDelay: 250 });
+
     if (data.hits.length) {
       Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
     }
@@ -64,6 +66,7 @@ async function onLoadMore() {
 
     renderCards(data.hits);
     lightbox.refresh();
+
     if (refs.gallery.children.length === data.totalHits) {
       refs.loadMoreBtn.style.display = 'none';
       Notiflix.Notify.info(
@@ -104,6 +107,7 @@ function renderCards(data) {
   </div></a>`
     )
     .join('');
+
   refs.gallery.insertAdjacentHTML('beforeend', card);
 }
 function clearGallery() {
